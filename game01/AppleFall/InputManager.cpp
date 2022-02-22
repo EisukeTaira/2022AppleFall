@@ -37,10 +37,14 @@ void InputMng_Init(void) {
 	input_mouse.y = 0;
 }
 // 入力キー更新処理
-void InputMng_Updata(void) {
+void InputMng_Updata(void)
+{
+	// キーボード入力 & ゲームパッド入力
 	input_key.oldkey = input_key.nowkey;
 	input_key.nowkey = GetJoypadInputState(DX_INPUT_KEY_PAD1);
 	input_key.keyflg = input_key.nowkey & ~input_key.oldkey;
+
+	// マウス入力
 	input_mouse.oldkey = input_mouse.nowkey;
 	input_mouse.nowkey = GetMouseInput();;
 	input_mouse.keyflg = input_mouse.nowkey & ~input_mouse.oldkey;
