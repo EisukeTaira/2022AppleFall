@@ -1,5 +1,6 @@
 #ifndef INPUT_MANAGER_H__
 
+#include "DxLib.h"
 
 // ŒöŠJŠÖ”éŒ¾
 void InputMng_Init(void);

@@ -46,7 +46,7 @@ void InputMng_Updata(void)
 
 	// マウス入力
 	input_mouse.oldkey = input_mouse.nowkey;
-	input_mouse.nowkey = GetMouseInput();;
+	input_mouse.nowkey = GetMouseInput();
 	input_mouse.keyflg = input_mouse.nowkey & ~input_mouse.oldkey;
 	//マウスの位置を取得
 	GetMousePoint(&input_mouse.x, &input_mouse.y);
@@ -55,7 +55,7 @@ void InputMng_Updata(void)
 bool GetInputKey(int key) {
 	bool ret = false;
 
-	if ((key & input_key.nowkey) != 0) {
+	if (key & input_key.nowkey) {
 		ret = true;
 	}
 
@@ -64,7 +64,7 @@ bool GetInputKey(int key) {
 bool GetInputKeyDown(int key) {
 	bool ret = false;
 
-	if ((key & input_key.keyflg) != 0) {
+	if (key & input_key.keyflg) {
 		ret = true;
 	}
 
