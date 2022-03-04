@@ -1,6 +1,8 @@
 #include "SceneManager.h"
 #include "InputManager.h"
 #include "Title.h"
+#include "GameMain.h"
+
 
 // マクロ定義
 
@@ -11,7 +13,7 @@ E_GAME_MODE now_scene;
 // 定数宣言
 
 // 内部関数プロトタイプ宣言
-void scene_switch(void);
+void scene_updata_switch(void);
 
 
 // シーンマネージャー初期化処理
@@ -21,14 +23,14 @@ int SceneMng_Init(void) {
 	now_scene = E_GAME_MODE::TITLE;	// ゲームモード初期化
 	
 	InputMng_Init();					// 入力機能初期化処理
-	ret = LoadTitleImg();
-
+	ret += LoadTitleImg();
+	ret += LoadGMainImg();
 	return ret;
 }
 // シーンマネージャー更新処理
 void SceneMng_Updata(void) {
 	InputMng_Updata();
-	scene_switch();
+	scene_updata_switch();
 }
 // 現在のシーンを取得
 E_GAME_MODE Get_SceneMng_Now(void) {
@@ -37,10 +39,34 @@ E_GAME_MODE Get_SceneMng_Now(void) {
 // 次のシーンに切り替え
 void Set_SceneMng_Next(E_GAME_MODE scene) {
 	now_scene = scene;
+	switch (now_scene)
+	{
+		case E_GAME_MODE::OPENING:
+			break;
+		case E_GAME_MODE::TITLE:
+			TitleInit();
+			break;
+		case E_GAME_MODE::RANKING:
+			break;
+		case E_GAME_MODE::HELP:
+			break;
+		case E_GAME_MODE::GEND:
+			break;
+		case E_GAME_MODE::GMAIN:
+			GMainInit();
+			break;
+		case E_GAME_MODE::GOVER:
+			break;
+		case E_GAME_MODE::INRANK:
+			break;
+		default:
+			
+			break;
+	}
 }
 
 // シーンをスイッチする
-void scene_switch(void) {
+void scene_updata_switch(void) {
 
 	if (GetInputKey(PAD_INPUT_START)) {
 		Set_SceneMng_Next(E_GAME_MODE::EXIT);
@@ -53,8 +79,6 @@ void scene_switch(void) {
 		case E_GAME_MODE::TITLE:
 			TitleUpdata();
 			break;
-		case E_GAME_MODE::GINIT:
-			break;
 		case E_GAME_MODE::RANKING:
 			break;
 		case E_GAME_MODE::HELP:
@@ -62,12 +86,14 @@ void scene_switch(void) {
 		case E_GAME_MODE::GEND:
 			break;
 		case E_GAME_MODE::GMAIN:
+			GMainUpdate();
 			break;
 		case E_GAME_MODE::GOVER:
 			break;
 		case E_GAME_MODE::INRANK:
 			break;
 		default:
+			Set_SceneMng_Next(E_GAME_MODE::EXIT);
 			break;
 	}
 }

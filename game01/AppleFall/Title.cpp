@@ -19,12 +19,7 @@ int TitleSnd[3];	// 音源用変数
 
 // タイトル機能初期化処理
 void TitleInit(void) {
-	int i;
-
-	for (i = 0; i < 3; i++) {
-		TitleImg[i] = 0;
-		TitleSnd[i] = 0;
-	}
+	
 }
 // タイトル機能更新処理
 void TitleUpdata(void) {
@@ -36,7 +31,7 @@ void TitleUpdata(void) {
 	}
 
 	if (GetInputKeyDown(PAD_INPUT_A)) {
-		Set_SceneMng_Next(E_GAME_MODE::GINIT);
+		Set_SceneMng_Next(E_GAME_MODE::GMAIN);
 	}
 }
 // タイトル機能画像読み込み

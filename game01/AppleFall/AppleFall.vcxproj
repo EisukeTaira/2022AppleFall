@@ -149,12 +149,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameMain.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Title.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameMain.h" />
+    <ClInclude Include="GMainConfig.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Title.h" />

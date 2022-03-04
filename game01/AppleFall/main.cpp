@@ -11,7 +11,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 	SetDrawScreen(DX_SCREEN_BACK);
 	SetGraphMode(640, 480, 32);
 	
-	if (SceneMng_Init() == -1) {
+	if (SceneMng_Init() != 0) {
 		return -1;
 	}
 
