@@ -16,7 +16,7 @@ E_GAME_MODE now_scene;
 void scene_updata_switch(void);
 
 
-// シーンマネージャー初期化処理
+// 初期化処理
 int SceneMng_Init(void) {
 	int ret = 0;
 
