@@ -9,10 +9,12 @@ enum {
 	BACK_GROUND,
 	PLAYER_STD,
 	PLAYER_RUN,
-	IMG_MAX
+	NUMBER,
+	IMG_MAX = NUMBER + 10
 };
 // 音源配列添え字
 enum {
+	BGM_SND,
 	GET_APL,
 	SND_MAX
 };
@@ -32,6 +34,7 @@ enum {
 #define	APPLE_EXT		(0.125)		// リンゴ画像拡大率
 #define APPLE_FALLSP	(10)		// リンゴ落下速度
 #define	APPLE_CRWD		(70)		// リンゴ生成幅
+
 // Player関連
 #define PSTD_POS_X		(250)		// プレイヤースタートX座標
 #define PSTD_POS_Y		(435)		// プレイヤースタートY座標
@@ -43,12 +46,12 @@ enum {
 #define	PSTD_EXT		(0.25)		// プレイヤー拡大率
 
 // UI関連
-#define	SET_TIME		(6000)	// 制限時間
+#define	SET_TIME		(3000)	// 制限時間
 
 // 型定義
 typedef struct {
-	int x;
-	int y;
+	int			x;			// 横
+	int			y;			// 縦
 }T_Vector2;
 typedef struct {
 	T_Vector2	pos;		// ポジション

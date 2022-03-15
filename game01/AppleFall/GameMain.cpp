@@ -6,7 +6,7 @@
 // 変数定義
 int GMainImg[IMG_MAX] = {};						// 画像用変数
 int GMainSnd[SND_MAX] = {};						// 音源用変数
-int Score[TYPE_MAX];							// スコア管理配列
+int Score[TYPE_MAX] = {};						// スコア管理配列
 int	WorldTime;									// 制限時間
 T_PLAYER Player;								// プレイヤー
 T_ENEMY Apple[APPLE_MAX] = {};					// 生成リンゴ
@@ -39,11 +39,12 @@ void GMainInit(void)
 	AppleStd.scale.x = APPLE_SCALE;
 	AppleStd.scale.y = APPLE_SCALE;
 	AppleStd.flg = false;
-	for (i = 0; i < APPLE_MAX; i++)
-	{
+	for (i = 0; i < APPLE_MAX; i++) {
 		Apple[i] = AppleStd;
 	}
-
+	for (i = 0; i < TYPE_MAX; i++) {
+		Score[i] = 0;
+	}
 	WorldTime = SET_TIME;
 }
 // ゲームメイン機能更新処理
@@ -66,6 +67,7 @@ int  LoadGMainImg(void)
 {
 	int i;
 
+	// 画像読み込み
 	GMainImg[BACK_GROUND] = LoadGraph("../images/bg_natural_mori.png");
 	GMainImg[APPLE_RED] = LoadGraph("../images/fruit_ringo.png");
 	GMainImg[APPLE_YLW] = LoadGraph("../images/fruit_apple_yellow.png");
@@ -73,12 +75,15 @@ int  LoadGMainImg(void)
 	GMainImg[APPLE_AST] = LoadGraph("../images/fruit_apple_shiwashiwa.png");
 	GMainImg[PLAYER_STD] = LoadGraph("../images/Player01.png");
 	GMainImg[PLAYER_RUN] = LoadGraph("../images/Player02.png");
+	LoadDivGraph("../images/number-simple-01.png", 10, 5, 2, 1, 1, &GMainImg[NUMBER]);
 
+	// エラーチェック
 	for (i = 0; i < IMG_MAX; i++) {
 		if (GMainImg[i] == -1) {
 			return -1;
 		}
 	}
+
 	return 0;
 }
 // ゲームメイン機能音源読み込み処理
@@ -133,10 +138,11 @@ void player_ctrl(void)
 		Player.scale.y = PSTD_HEIGHT;
 	}
 
+
 	// 当たり判定を可視化
-	DrawBox((Player.pos.x - (Player.scale.x >> 1)), (Player.pos.y - (Player.scale.y >> 1)), 
+	/*DrawBox((Player.pos.x - (Player.scale.x >> 1)), (Player.pos.y - (Player.scale.y >> 1)), 
 			(Player.pos.x + (Player.scale.x >> 1)), (Player.pos.y + (Player.scale.y >> 1)),
-			0x00000000, FALSE);
+			0x00000000, FALSE);*/
 	DrawRotaGraph(Player.pos.x, Player.pos.y, PSTD_EXT, Player.angle, Player.img, TRUE, flip, FALSE);
 }
 // リンゴ制御処理
@@ -147,9 +153,9 @@ void apple_ctrl(void)
 		if (Apple[i].flg) {
 			
 			DrawRotaGraph(Apple[i].pos.x, Apple[i].pos.y, APPLE_EXT, 0.0, Apple[i].img, TRUE);
-			DrawBox((Apple[i].pos.x - (Apple[i].scale.x >> 1)), (Apple[i].pos.y - (Apple[i].scale.y >> 1)),
+			/*DrawBox((Apple[i].pos.x - (Apple[i].scale.x >> 1)), (Apple[i].pos.y - (Apple[i].scale.y >> 1)),
 				(Apple[i].pos.x + (Apple[i].scale.x >> 1)), (Apple[i].pos.y + (Apple[i].scale.y >> 1)),
-				0x00000000, FALSE);
+				0x00000000, FALSE);*/
 			if (!Player.flg) {
 				continue;
 			}
@@ -180,7 +186,9 @@ void apple_ctrl(void)
 				}
 				if(Apple[i].type == APPLE_AST) {
 					for (j = 0; j < APPLE_AST; j++) {
-						Score[j] -= 5;
+						if (Score[j] > 0) {
+							Score[j]--;
+						}
 					}
 				}
 			}
@@ -213,7 +221,19 @@ void create_apple(void)
 // UI描画処理
 void stage_ui_ctrl(void)
 {
+	int i;
 
+	SetFontSize(25);
+	DrawFormatString(520, 50, 0x00000000, "制限時間");
+	SetFontSize(50);
+	DrawFormatString(550, 100, 0x00000000, "%02d", (WorldTime / 100));
+	for (i = 0; i < APPLE_AST; i++) {
+		DrawRotaGraph((535 + (i * 40)), 230, 0.075, 0.0, GMainImg[i], TRUE);
+	}
+	SetFontSize(15);
+	for (i = 0; i < APPLE_AST; i++) {
+		DrawFormatString((530 + (i * 40)), 250, 0x00000000, "%02d", Score[i]);
+	}
 }
 // 当たり判定チェック
 int hitcheck(T_PLAYER *p, T_ENEMY *e)
