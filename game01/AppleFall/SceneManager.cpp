@@ -2,6 +2,7 @@
 #include "InputManager.h"
 #include "Title.h"
 #include "GameMain.h"
+#include "HelpScene.h"
 
 
 // マクロ定義
@@ -25,6 +26,8 @@ int SceneMng_Init(void) {
 	InputMng_Init();					// 入力機能初期化処理
 	ret += LoadTitleImg();
 	ret += LoadGMainImg();
+	ret += LoadHelpImg();
+
 	return ret;
 }
 // シーンマネージャー更新処理
@@ -49,6 +52,7 @@ void Set_SceneMng_Next(E_GAME_MODE scene) {
 		case E_GAME_MODE::RANKING:
 			break;
 		case E_GAME_MODE::HELP:
+			Help_Init();
 			break;
 		case E_GAME_MODE::GEND:
 			break;
@@ -59,8 +63,7 @@ void Set_SceneMng_Next(E_GAME_MODE scene) {
 			break;
 		case E_GAME_MODE::INRANK:
 			break;
-		default:
-			
+		default:			
 			break;
 	}
 }
@@ -82,6 +85,7 @@ void scene_updata_switch(void) {
 		case E_GAME_MODE::RANKING:
 			break;
 		case E_GAME_MODE::HELP:
+			Help_Update();
 			break;
 		case E_GAME_MODE::GEND:
 			break;

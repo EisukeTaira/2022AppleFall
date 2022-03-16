@@ -4,7 +4,7 @@
 // ŠO•”ŒöŠJŠÖ”’è‹`
 void Help_Init(void);
 void Help_Update(void);
-int Help_LoadImg(void);
-int Help_LoadSmg(void);
+int LoadHelpImg(void);
+int LoadHelpSnd(void);
 
 #endif // !HELP_SCENE_H__

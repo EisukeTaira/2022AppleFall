@@ -13,16 +13,21 @@ void Help_Init(void)
 // ヘルプ機能更新処理
 void Help_Update(void)
 {
-
+	DrawRotaGraph((640 >> 1), (480 >> 1), 1, 1, HelpImg, TRUE);
 }
 // ヘルプ機能画像読み込み
-int Help_LoadImg(void)
+int LoadHelpImg(void)
 {
-	HelpImg = LoadGraph("../images/ringo.png");
-	return 0;
+	int ret = 0;
+
+	HelpImg = LoadGraph("../images/fruit_ringo.png");
+	if (HelpImg == -1) {
+		ret = -1;
+	}
+	return ret;
 }
 // ヘルプ機能音源読み込み
-int Help_LoadSmg(void)
+int LoadHelpSnd(void)
 {
 	return 0;
 }
