@@ -3,6 +3,7 @@
 #include "Title.h"
 #include "GameMain.h"
 #include "HelpScene.h"
+#include "GameEnd.h"
 
 
 // マクロ定義
@@ -24,9 +25,10 @@ int SceneMng_Init(void) {
 	now_scene = E_GAME_MODE::TITLE;	// ゲームモード初期化
 	
 	InputMng_Init();					// 入力機能初期化処理
-	ret += LoadTitleImg();
-	ret += LoadGMainImg();
-	ret += LoadHelpImg();
+	ret += LoadTitleImg();				// タイトル機能画像読込処理
+	ret += LoadGMainImg();				// ゲームメイン機能画像読込処理
+	ret += LoadHelpImg();				// ヘルプ機能画像読込処理
+	ret += LoadGEndImg();				// エンド機能画像読込処理
 
 	return ret;
 }
@@ -55,6 +57,7 @@ void Set_SceneMng_Next(E_GAME_MODE scene) {
 			Help_Init();
 			break;
 		case E_GAME_MODE::GEND:
+			GEnd_Init();
 			break;
 		case E_GAME_MODE::GMAIN:
 			GMainInit();
@@ -88,6 +91,7 @@ void scene_updata_switch(void) {
 			Help_Update();
 			break;
 		case E_GAME_MODE::GEND:
+			GEnd_Update();
 			break;
 		case E_GAME_MODE::GMAIN:
 			GMainUpdate();

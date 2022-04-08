@@ -149,6 +149,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameEnd.cpp" />
     <ClCompile Include="GameMain.cpp" />
     <ClCompile Include="HelpScene.cpp" />
     <ClCompile Include="InputManager.cpp" />
@@ -157,6 +158,7 @@
     <ClCompile Include="Title.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameEnd.h" />
     <ClInclude Include="GameMain.h" />
     <ClInclude Include="GMainConfig.h" />
     <ClInclude Include="HelpScene.h" />
