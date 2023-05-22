@@ -1,5 +1,6 @@
 #include "DxLib.h"
 #include "Scene/GameMainScene.h"
+#include "Common/FrameRateControl.h"
 
 // メイン関数
 int WINAPI WinMain(_In_ HINSTANCE ih, _In_opt_ HINSTANCE ioh, _In_ LPSTR il, _In_ int ii)
@@ -14,16 +15,26 @@ int WINAPI WinMain(_In_ HINSTANCE ih, _In_opt_ HINSTANCE ioh, _In_ LPSTR il, _In
 	}
 	
 	GameMainScene gms;
+	FrameRateControl frc;
 
 	// メインループ
 	while (ProcessMessage() != -1)
 	{
 		// 画面の初期化
 		ClearDrawScreen();
-		
+		frc.Update();
 		gms.Update();
+	
 		gms.Draw();
 
+		if (CheckHitKey(KEY_INPUT_ESCAPE))
+		{
+			break;
+		}
+#if _DEBUG
+		frc.Draw();
+#endif // _DEBUG	
+		frc.Wait();
 		// 裏画面と表画面の交換
 		ScreenFlip();
 	}

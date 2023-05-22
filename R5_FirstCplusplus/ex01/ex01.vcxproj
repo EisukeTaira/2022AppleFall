@@ -135,9 +135,10 @@
     <ClCompile Include="Apple\RedApple.cpp" />
     <ClCompile Include="Apple\YellowApple.cpp" />
     <ClCompile Include="AppMain.cpp" />
+    <ClCompile Include="Common\Vector2.cpp" />
+    <ClCompile Include="Input\InputControl.cpp" />
     <ClCompile Include="Scene\GameMainScene.cpp" />
     <ClCompile Include="Apple\GreenApple.cpp" />
-    <ClCompile Include="Input\InputControl.cpp" />
     <ClCompile Include="Player\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +147,7 @@
     <ClInclude Include="Apple\RedApple.h" />
     <ClInclude Include="Apple\YellowApple.h" />
     <ClInclude Include="Common\Vector2.h" />
+    <ClInclude Include="Common\FrameRateControl.h" />
     <ClInclude Include="Scene\GameMainScene.h" />
     <ClInclude Include="Apple\GreenApple.h" />
     <ClInclude Include="Input\InputControl.h" />

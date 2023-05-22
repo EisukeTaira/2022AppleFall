@@ -12,7 +12,7 @@ public:
 		E_GREEN,
 		E_YELLOW,
 		E_POISON,
-		E_APPLE_STATE_MAX,
+		E_APPLE_TYPE_MAX,
 	};
 protected:
 	int image;			// ‰æ‘œƒf[ƒ^
@@ -21,13 +21,23 @@ protected:
 	APPLE_TYPE type;	// ƒŠƒ“ƒS‚ÌŽí—Þ
 
 public:
-	AppleBase() = default;
-	~AppleBase() {}
+	AppleBase()
+	{
+		image = NULL;
+		location.x = 0.0f;
+		location.y = 0.0f;
+		radius = 0.0f;
+		type = E_RED;
+	}
+	~AppleBase()
+	{
+	
+	}
 
 	virtual void Update() = 0;
 	virtual void Draw() const = 0;
 
-	void SetLocation(float x, float y)
+	void SetLocation(float x = 0.0f, float y = 0.0f)
 	{
 		this->location.x = x;
 		this->location.y = y;
@@ -35,6 +45,14 @@ public:
 	Vector2 GetLocation() const
 	{
 		return this->location;
+	}
+	float GetLocationX() const
+	{
+		return this->location.x;
+	}
+	float GetLocationY() const
+	{
+		return this->location.y;
 	}
 	float GetRadius() const
 	{

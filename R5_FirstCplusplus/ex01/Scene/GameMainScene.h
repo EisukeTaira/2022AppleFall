@@ -12,12 +12,19 @@ class GameMainScene
 {
 private:
 	Player* player;
-	AppleBase* apple[10];
+	AppleBase* apple[APPLE_MAX];
+	int generate_count;
+	int score;
 public:
 	GameMainScene();
 	~GameMainScene();
 
 	void Update();
 	void Draw() const;
+
+	void CreateApple(void);
+private:
+	bool OnCollision(const Player* player, const AppleBase* apple);
+	void AddScore(AppleBase::APPLE_TYPE type);
 };
 

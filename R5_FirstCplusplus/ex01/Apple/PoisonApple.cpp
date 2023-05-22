@@ -7,5 +7,5 @@ void PoisonApple::Update()
 
 void PoisonApple::Draw() const
 {
-	DrawCircle((int)this->location.x, (int)this->location.y, (int)this->radius, GetColor(0, 255, 0), TRUE);
+	DrawCircle((int)this->location.x, (int)this->location.y, (int)this->radius, GetColor(136, 72, 152), TRUE);
 }

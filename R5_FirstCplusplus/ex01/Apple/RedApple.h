@@ -10,7 +10,7 @@ public:
 		this->location.x = 0;
 		this->location.y = 0;
 		image = NULL;
-		radius = 10.0f;
+		radius = 15.0f;
 		type = E_RED;
 	}
 	RedApple(float x, float y)
