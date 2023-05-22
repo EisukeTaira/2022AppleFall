@@ -1,5 +1,9 @@
 #include "GameMainScene.h"
 #include "DxLib.h"
+#include "../Input/InputControl.h"
+
+#define KILL_Y (750.0f)
+#define GENERATE_TIME (30)
 
 // コンストラクタ
 GameMainScene::GameMainScene()
@@ -11,6 +15,7 @@ GameMainScene::GameMainScene()
 	}
 	CreateApple();
 	generate_count = 0;
+	pause_flg = false;
 }
 
 //デストラクタ
@@ -28,19 +33,42 @@ GameMainScene::~GameMainScene()
 // 更新処理
 void GameMainScene::Update()
 {
+	if (InputControl::ButtonDown(XINPUT_BUTTON_START))
+	{
+		if (pause_flg)
+		{
+			pause_flg = false;
+		}
+		else
+		{
+			pause_flg = true;
+		}
+	}
+
+	if (pause_flg)
+	{
+		return;
+	}
+
 	// プレイヤー機能：更新処理
 	player->Update();
+
 	// リンゴ機能：更新処理
 	for (int i = 0; i < APPLE_MAX; i++)
 	{
 		if (apple[i] != nullptr)
 		{
 			apple[i]->Update();
-			if (apple[i]->GetLocationY() >= 750.0f)
+
+			// キルYに到達したか？
+			if (apple[i]->GetLocationY() >= KILL_Y)
 			{
 				delete apple[i];
 				apple[i] = nullptr;
+				continue;
 			}
+
+			// 当たり判定確認
 			if (!(player->GetFlashFlg()) && OnCollision(player, apple[i]))
 			{
 				AddScore(apple[i]->GetType());
@@ -53,7 +81,8 @@ void GameMainScene::Update()
 
 	generate_count++;
 
-	if (generate_count >= 25)
+	// 生成処理
+	if (generate_count >= GENERATE_TIME)
 	{
 		generate_count = 0;
 		CreateApple();
@@ -144,9 +173,9 @@ bool GameMainScene::OnCollision(const Player* player, const AppleBase* apple)
 
 	// 四角形の四辺に対して円の半径文だけ足したとき、円が重なっていたら
 	if ((apple->GetLocationX() > (player->GetLocationX() - apple->GetRadius())) &&
-		(apple->GetLocationX() < (player->GetLocationX() + player->GetSizeX() - apple->GetRadius())) &&
+		(apple->GetLocationX() < (player->GetLocationX() + player->GetSizeX() + apple->GetRadius())) &&
 		(apple->GetLocationY() > (player->GetLocationY() - apple->GetRadius())) &&
-		(apple->GetLocationY() < (player->GetLocationY() + player->GetSizeY() - apple->GetRadius())))
+		(apple->GetLocationY() < (player->GetLocationY() + player->GetSizeY() + apple->GetRadius())))
 	{
 		ret = true;
 		fl = apple->GetRadius() * apple->GetRadius();

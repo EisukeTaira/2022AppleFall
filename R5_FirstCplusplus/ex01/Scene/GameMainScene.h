@@ -15,6 +15,7 @@ private:
 	AppleBase* apple[APPLE_MAX];
 	int generate_count;
 	int score;
+	bool pause_flg;
 public:
 	GameMainScene();
 	~GameMainScene();

@@ -1,5 +1,6 @@
 #include "DxLib.h"
 #include "Scene/GameMainScene.h"
+#include "Input/InputControl.h"
 #include "Common/FrameRateControl.h"
 
 // ÉÅÉCÉìä÷êî
@@ -22,12 +23,15 @@ int WINAPI WinMain(_In_ HINSTANCE ih, _In_opt_ HINSTANCE ioh, _In_ LPSTR il, _In
 	{
 		// âÊñ ÇÃèâä˙âª
 		ClearDrawScreen();
+
+		InputControl::Update();
+
 		frc.Update();
 		gms.Update();
 	
 		gms.Draw();
 
-		if (CheckHitKey(KEY_INPUT_ESCAPE))
+		if (CheckHitKey(KEY_INPUT_ESCAPE) || InputControl::ButtonDown(XINPUT_BUTTON_BACK))
 		{
 			break;
 		}
