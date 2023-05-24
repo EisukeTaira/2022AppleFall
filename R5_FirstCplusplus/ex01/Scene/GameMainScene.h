@@ -1,5 +1,6 @@
 #pragma once
 
+#include "AbstractScene.h"
 #include "../Apple/RedApple.h"
 #include "../Apple/GreenApple.h"
 #include "../Apple/YellowApple.h"
@@ -8,23 +9,27 @@
 
 #define APPLE_MAX	(10)
 
-class GameMainScene
+class GameMainScene : public AbstractScene
 {
 private:
 	Player* player;
 	AppleBase* apple[APPLE_MAX];
-	int generate_count;
+	int back_ground;
+	int ui_image[4];
+	int ui_count[4];
 	int score;
+	int time_limit;
+	int generate_count;
 	bool pause_flg;
 public:
 	GameMainScene();
 	~GameMainScene();
 
-	void Update();
-	void Draw() const;
+	AbstractScene* Update() override;
+	void Draw() const override;
 
-	void CreateApple(void);
 private:
+	void CreateApple(void);
 	bool OnCollision(const Player* player, const AppleBase* apple);
 	void AddScore(AppleBase::APPLE_TYPE type);
 };

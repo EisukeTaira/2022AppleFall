@@ -136,12 +136,20 @@
     <ClCompile Include="Apple\YellowApple.cpp" />
     <ClCompile Include="AppMain.cpp" />
     <ClCompile Include="Common\Vector2.cpp" />
+    <ClCompile Include="Scene\EndingScene.cpp" />
     <ClCompile Include="Input\InputControl.cpp" />
+    <ClCompile Include="Scene\RankingScene.cpp" />
+    <ClCompile Include="Scene\SceneManager.cpp" />
     <ClCompile Include="Scene\GameMainScene.cpp" />
     <ClCompile Include="Apple\GreenApple.cpp" />
     <ClCompile Include="Player\Player.cpp" />
+    <ClCompile Include="Scene\TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Scene\EndingScene.h" />
+    <ClInclude Include="Scene\RankingScene.h" />
+    <ClInclude Include="Scene\SceneManager.h" />
+    <ClInclude Include="Scene\AbstractScene.h" />
     <ClInclude Include="Apple\AppleBase.h" />
     <ClInclude Include="Apple\PoisonApple.h" />
     <ClInclude Include="Apple\RedApple.h" />
@@ -152,6 +160,7 @@
     <ClInclude Include="Apple\GreenApple.h" />
     <ClInclude Include="Input\InputControl.h" />
     <ClInclude Include="Player\Player.h" />
+    <ClInclude Include="Scene\TitleScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

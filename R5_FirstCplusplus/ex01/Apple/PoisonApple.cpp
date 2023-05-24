@@ -2,10 +2,8 @@
 
 PoisonApple::PoisonApple()
 {
-	this->location.x = 0;
-	this->location.y = 0;
-	image = NULL;
-	radius = 15.0f;
+	image = LoadGraph("Resource/images/fruit_apple_shiwashiwa.png");
+	radius = 18.5f;
 	type = E_POISON;
 }
 
@@ -16,6 +14,5 @@ void PoisonApple::Update()
 
 void PoisonApple::Draw() const
 {
-	DrawCircleAA(this->location.x, this->location.y, this->radius, 150, GetColor(136, 72, 152), TRUE);
-	DrawCircleAA(this->location.x, this->location.y, this->radius, 150, GetColor(0, 0, 0), FALSE);
+	DrawRotaGraphF(this->location.x, this->location.y, 0.125, 0.0, image, TRUE);
 }

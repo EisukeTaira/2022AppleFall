@@ -1,20 +1,20 @@
 #include "DxLib.h"
 #include "InputControl.h"
 
-#define MAX_TRIGGER		(255.0f)	// XInputトリガーの最大入力値
-#define MAX_THUMB		(32767.0f)	// XInputスティックの最大入力値
-#define MIN_THUMB		(-32768.0f)	// XInputスティックの最小入力値
-#define BUTTON_PRESS	(1)			// XInputボタンが押されている時の値
-#define BUTTON_RELEASE	(0)			// XInputボタンが離されている時の値
+#define MAX_TRIGGER		(255.0f)									// XInputトリガーの最大入力値
+#define MAX_THUMB		(32767.0f)									// XInputスティックの最大入力値
+#define MIN_THUMB		(-32768.0f)									// XInputスティックの最小入力値
+#define BUTTON_PRESS	(1)											// XInputボタンが押されている時の値
+#define BUTTON_RELEASE	(0)											// XInputボタンが離されている時の値
 
-unsigned char InputControl::oldButtons[16] = {};	// 前フレームのボタン入力情報
-unsigned char InputControl::nowButtons[16] = {};	// 現在フレームのボタン入力情報
-float InputControl::leftTrigger = 0.0f;				// 左トリガー( 0.0 ～ 1.0 )
-float InputControl::rightTrigger = 0.0f;			// 右トリガー( 0.0 ～ 1.0 )	
-float InputControl::thumbLX = 0.0f;					// 左スティックの横軸値( -1.0 ～ 1.0 )
-float InputControl::thumbLY = 0.0f;					// 左スティックの縦軸値( -1.0 ～ 1.0 )
-float InputControl::thumbRX = 0.0f;					// 右スティックの横軸値( -1.0 ～ 1.0 )
-float InputControl::thumbRY = 0.0f;					// 右スティックの縦軸値( -1.0 ～ 1.0 )
+unsigned char InputControl::oldButtons[XINPUT_BUTTONS_MAX] = {};	// 前フレームのボタン入力情報
+unsigned char InputControl::nowButtons[XINPUT_BUTTONS_MAX] = {};	// 現在フレームのボタン入力情報
+float InputControl::leftTrigger = 0.0f;								// 左トリガー( 0.0 ～ 1.0 )
+float InputControl::rightTrigger = 0.0f;							// 右トリガー( 0.0 ～ 1.0 )	
+float InputControl::thumbLX = 0.0f;									// 左スティックの横軸値( -1.0 ～ 1.0 )
+float InputControl::thumbLY = 0.0f;									// 左スティックの縦軸値( -1.0 ～ 1.0 )
+float InputControl::thumbRX = 0.0f;									// 右スティックの横軸値( -1.0 ～ 1.0 )
+float InputControl::thumbRY = 0.0f;									// 右スティックの縦軸値( -1.0 ～ 1.0 )
 
 int InputControl::CheckButtonIndex(const short checkXButton)
 {

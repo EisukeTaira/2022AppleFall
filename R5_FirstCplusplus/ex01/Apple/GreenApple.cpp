@@ -3,10 +3,8 @@
 // コンストラクタ
 GreenApple::GreenApple()
 {
-	this->location.x = 0.0f;
-	this->location.y = 0.0f;
-	image = NULL;
-	radius = 15.0f;
+	image = LoadGraph("Resource/images/fruit_ao_ringo.png");
+	radius = 23.5f;
 	type = E_GREEN;
 }
 
@@ -19,6 +17,5 @@ void GreenApple::Update()
 // 描画処理
 void GreenApple::Draw() const
 {
-	DrawCircleAA(this->location.x, this->location.y, this->radius, 150, GetColor(0, 255, 0), TRUE);
-	DrawCircleAA(this->location.x, this->location.y, this->radius, 150, GetColor(0, 0, 0), FALSE);
+	DrawRotaGraphF(this->location.x, this->location.y, 0.125, 0.0, image, TRUE);
 }
