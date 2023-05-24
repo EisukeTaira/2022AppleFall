@@ -17,4 +17,5 @@ void YellowApple::Update()
 void YellowApple::Draw() const
 {
 	DrawCircleAA(this->location.x, this->location.y, this->radius, 150, GetColor(255, 217, 0), TRUE);
+	DrawCircleAA(this->location.x, this->location.y, this->radius, 150, GetColor(0, 0, 0), FALSE);
 }

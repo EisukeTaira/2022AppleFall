@@ -6,7 +6,7 @@
 class Player
 {
 private:
-	int image;
+	int* image;
 	Vector2 location;
 	Vector2 size;
 	float speed;

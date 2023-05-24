@@ -37,7 +37,7 @@ public:
 	}
 	void Draw()
 	{
-		DrawFormatString(10, 10, GetColor(255, 255, 255), "%.2f", fps);
+		DrawFormatString(10, 10, GetColor(0, 0, 0), "%.2f", fps);
 	}
 	void Wait()
 	{

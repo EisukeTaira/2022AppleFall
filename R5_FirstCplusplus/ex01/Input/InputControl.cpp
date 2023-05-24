@@ -20,8 +20,7 @@ int InputControl::CheckButtonIndex(const short checkXButton)
 {
 	// 引数の値がXInputボタン入力定義の範囲内(0～15)かどうか調べる
 	int ret = FALSE;
-	if (0 <= checkXButton
-		&& checkXButton <= (XINPUT_BUTTONS_MAX - 1))
+	if (0 <= checkXButton && checkXButton < XINPUT_BUTTONS_MAX)
 	{
 		ret = TRUE;
 	}
