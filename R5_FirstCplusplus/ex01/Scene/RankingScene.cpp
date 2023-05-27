@@ -7,7 +7,7 @@ RankingScene::RankingScene()
 {
 	back_ground = LoadGraph("Resource/images/bg_natural_mori.png");
 	ReadFile();
-	this->mode = RankingScene::E_DISP_MODE;
+	mode = RankingScene::E_INPUT_MODE;
 	flash_time = 0;
 	disp_flg = true;
 }
@@ -23,6 +23,7 @@ RankingScene::RankingScene(int score)
 	{
 		this->mode = RankingScene::E_INPUT_MODE;
 		data[RANKING_DATA_MAX - 1].score = score;
+		SortRanking();
 	}
 	else
 	{
@@ -40,15 +41,18 @@ AbstractScene* RankingScene::Update()
 	switch (mode)
 	{
 		case RankingScene::E_INPUT_MODE:
+			// 名前入力処理
 			NameInput();
 			break;
 		case RankingScene::E_DISP_MODE:
+			// 点滅させる
 			flash_time++;
 			if (flash_time % 30 == 0)
 			{
 				disp_flg = !disp_flg;
 			}
 
+			// Bボタンが押されたら、タイトルへ戻る
 			if (InputControl::ButtonDown(XINPUT_BUTTON_B))
 			{
 				return new TitleScene();
@@ -139,4 +143,20 @@ void RankingScene::NameInput()
 
 void RankingScene::NameInputDisp() const
 {
+	// 「A～Z」, 「a～z」, 「0～9」と「決定」を表示
+	SetFontSize(30);
+	for (int i = 0; i < 26; i++)
+	{
+		DrawFormatString((30 * (i % 13) + 20), (40 * (i / 13) + 20), GetColor(255, 255, 255), "%c", ('A' + i));
+		DrawFormatString((30 * (i % 13) + 20), (40 * (i / 13) + 100), GetColor(255, 255, 255), "%c", ('a' + i));
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		DrawFormatString((30 * i + 20), 180, GetColor(255, 255, 255), "%d", i);
+	}
+	DrawFormatString(320, 180, GetColor(255, 255, 255), "決定");
+	SetFontSize(20);
+
+	// 選択している場所を表示
+
 }

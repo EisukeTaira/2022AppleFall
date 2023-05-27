@@ -2,6 +2,7 @@
 #include "Scene/SceneManager.h"
 #include "Scene/TitleScene.h"
 #include "Scene/GameMainScene.h"
+#include "Scene/RankingScene.h"
 #include "Input/InputControl.h"
 #include "Common/FrameRateControl.h"
 
