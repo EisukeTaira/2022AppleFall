@@ -65,9 +65,6 @@
     <ClInclude Include="Input\InputControl.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Collision\CircleCollision.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Actor\Bar.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>

@@ -15,5 +15,8 @@ public:
 
 	AbstractScene* Update() override;	// XVˆ—
 	void Draw() const override;			// •`‰æˆ—
+
+private:
+	int HitCheck_BB(const BoxCollision* bc, const BoxCollision* cc);
 };
 

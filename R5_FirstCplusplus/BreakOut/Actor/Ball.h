@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../Collision/CircleCollision.h"
+#include "../Collision/BoxCollision.h"
 
-class Ball : public CircleCollision
+class Ball : public BoxCollision
 {
 public:
 	enum STATE
@@ -16,6 +16,7 @@ private:
 	STATE state;
 	Vector2 direction;
 	float speed;
+	float angle;
 	int remaining_lives;
 
 public:
