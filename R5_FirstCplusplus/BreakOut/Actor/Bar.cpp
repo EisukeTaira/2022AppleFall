@@ -18,6 +18,19 @@ Bar::~Bar()
 void Bar::Update()
 {
 	location.x = static_cast<float>(InputControl::GetMouseLocationX());
+
+	if (location.x < 0.0f)
+	{
+		location.x = 0.0f;
+	}
+	else if (location.x > (640.0f - size.x))
+	{
+		location.x = (640.0f - size.x);
+	}
+	else
+	{
+		;
+	}
 }
 
 void Bar::Draw() const

@@ -24,6 +24,7 @@
     <ProjectGuid>{1c4a7eb7-53b4-4d95-9539-90323bb37076}</ProjectGuid>
     <RootNamespace>ex01</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>AppleFall</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

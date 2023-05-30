@@ -4,9 +4,9 @@
 
 class ResultScene : public AbstractScene
 {
-public:
-
 private:
+
+public:
 	ResultScene();						// コンストラクタ
 	~ResultScene();						// デストラクタ
 

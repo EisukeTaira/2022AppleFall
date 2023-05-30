@@ -1,4 +1,5 @@
 #include "GameMainScene.h"
+#include "ResultScene.h"
 #include "DxLib.h"
 
 // コンストラクタ
@@ -24,9 +25,11 @@ AbstractScene* GameMainScene::Update()
 	{
 		ball->SetLocation(bar->GetLocation());
 	}
-	else
+	ball->Update();
+
+	if (ball->GetRemaining_Lives() < 0)
 	{
-		ball->Update();
+		return dynamic_cast<AbstractScene*>(new ResultScene);
 	}
 
 	return dynamic_cast<AbstractScene*>(this);
