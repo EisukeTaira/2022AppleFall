@@ -24,7 +24,7 @@ Ball::Ball(Vector2 location)
 	size.x = 15.0f;
 	size.y = 15.0f;
 	state = E_STAY;
-	speed = 5.0f;
+	speed = 2.5f;
 	direction.x = 0.0f;
 	direction.y = 0.0f;
 	angle = 0.625f;
@@ -51,7 +51,7 @@ void Ball::Update()
 			location.x += direction.x;
 			location.y += direction.y;
 
-			if (location.x < 0.1f || (640.0f - size.x) < location.x)
+			if (location.x < 4.0f || (640.0f - size.x) < location.x)
 			{
 				this->angle = (1.0f - this->angle) + 0.5f;
 				if (this->angle > 1.0f)
@@ -61,7 +61,7 @@ void Ball::Update()
 				ChangeDirection(angle);
 			}
 
-			if (location.y < 0.1f)
+			if (location.y < 1.0f)
 			{
 				this->angle = (1.0f - this->angle);
 				ChangeDirection(angle);

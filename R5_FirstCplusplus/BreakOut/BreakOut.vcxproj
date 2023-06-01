@@ -134,6 +134,7 @@
     <ClCompile Include="AppMain.cpp" />
     <ClCompile Include="Actor\Bar.cpp" />
     <ClCompile Include="Actor\Ball.cpp" />
+    <ClCompile Include="Actor\Block.cpp" />
     <ClCompile Include="Input\InputControl.cpp" />
     <ClCompile Include="Scene\EndingScene.cpp" />
     <ClCompile Include="Scene\ResultScene.cpp" />
@@ -144,6 +145,7 @@
   <ItemGroup>
     <ClInclude Include="Actor\Bar.h" />
     <ClInclude Include="Actor\Ball.h" />
+    <ClInclude Include="Actor\Block.h" />
     <ClInclude Include="Collision\BoxCollision.h" />
     <ClInclude Include="Collision\Vector2.h" />
     <ClInclude Include="Input\InputControl.h" />
