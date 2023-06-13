@@ -9,7 +9,7 @@ PoisonApple::PoisonApple()
 
 void PoisonApple::Update()
 {
-	this->location.y += 0.5f;
+	this->location.y += 3.0f;
 }
 
 void PoisonApple::Draw() const

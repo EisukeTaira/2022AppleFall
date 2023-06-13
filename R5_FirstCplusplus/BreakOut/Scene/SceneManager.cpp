@@ -1,4 +1,6 @@
 #include "SceneManager.h"
+#include "../Input/InputControl.h"
+#include "DxLib.h"
 
 SceneManager::SceneManager(AbstractScene* scene)
 {
@@ -10,9 +12,27 @@ SceneManager::~SceneManager()
 	delete mScene;
 }
 
-AbstractScene* SceneManager::Update()
+void SceneManager::Update()
 {
-	AbstractScene* p = mScene->Update();
+	// 入力制御機能：更新処理
+	InputControl::Update();
+	// シーンの更新処理
+	mScene->Update();
+}
+
+void SceneManager::Draw() const
+{
+	// 画面の初期化
+	ClearDrawScreen();
+	// シーンの描画処理
+	mScene->Draw();
+	// 裏画面の内容を表画面に反映
+	ScreenFlip();
+}
+
+AbstractScene* SceneManager::Change()
+{
+	AbstractScene* p = mScene->Change();
 
 	if (p != mScene)
 	{
@@ -20,10 +40,5 @@ AbstractScene* SceneManager::Update()
 		mScene = p;
 	}
 
-	return p;
-}
-
-void SceneManager::Draw() const
-{
-	mScene->Draw();
+	return mScene;
 }

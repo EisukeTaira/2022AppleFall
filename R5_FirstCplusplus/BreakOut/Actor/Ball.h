@@ -16,12 +16,10 @@ private:
 	STATE state;
 	Vector2 direction;
 	float speed;
-	float angle;
 	int remaining_lives;
 
 public:
 	Ball();
-	Ball(Vector2 location);
 	~Ball();
 
 	void Update();
@@ -31,6 +29,7 @@ public:
 	void SetLocation(Vector2 location);
 	int GetRemaining_Lives() const;
 
+	void ChangeDirection();
 	void ChangeDirection(float angle);
 };
 

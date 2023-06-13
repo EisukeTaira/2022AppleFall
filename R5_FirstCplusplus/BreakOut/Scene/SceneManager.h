@@ -11,6 +11,7 @@ public:
 	SceneManager(AbstractScene* scene);
 	~SceneManager();
 
-	AbstractScene* Update() override;
+	void Update() override;
 	void Draw() const override;
+	AbstractScene* Change() override;
 };

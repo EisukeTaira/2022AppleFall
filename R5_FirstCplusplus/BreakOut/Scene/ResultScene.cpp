@@ -13,9 +13,9 @@ ResultScene::~ResultScene()
 }
 
 // 更新処理
-AbstractScene* ResultScene::Update()
+void ResultScene::Update()
 {
-	return dynamic_cast<AbstractScene*>(this);
+	
 }
 
 // 描画処理
@@ -25,4 +25,9 @@ void ResultScene::Draw() const
 	DrawFormatString(10, 10, GetColor(255, 255, 255), "リザルト画面");
 #endif // _DEBUG
 
+}
+
+AbstractScene* ResultScene::Change()
+{
+	return nullptr;
 }

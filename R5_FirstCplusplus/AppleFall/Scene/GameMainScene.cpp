@@ -211,22 +211,7 @@ void GameMainScene::CreateApple(void)
 
 			// ¶¬‚·‚éƒŠƒ“ƒS‚Ìí—Ş‚ğŒˆ’è
 			generate_type = rand() % 100;
-			if (generate_type < 60)
-			{
-				type = AppleBase::E_RED;
-			}
-			else if (generate_type < 85)
-			{
-				type = AppleBase::E_GREEN;
-			}
-			else if (generate_type < 95)
-			{
-				type = AppleBase::E_YELLOW;
-			}
-			else
-			{
-				type = AppleBase::E_POISON;
-			}
+			type = AppleBase::E_POISON;
 
 			// ƒŠƒ“ƒS‚Ìí—Ş‚É‚æ‚Á‚Ä¶¬
 			switch (type)

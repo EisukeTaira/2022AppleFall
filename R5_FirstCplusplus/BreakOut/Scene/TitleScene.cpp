@@ -17,14 +17,9 @@ TitleScene::~TitleScene()
 }
 
 // XVˆ—
-AbstractScene* TitleScene::Update()
+void TitleScene::Update()
 {
-	if (InputControl::MouseButtonDown(MOUSE_INPUT_LEFT))
-	{
-		return dynamic_cast<AbstractScene*>(new GameMainScene);
-	}
 
-	return dynamic_cast<AbstractScene*>(this);
 }
 
 // •`‰æˆ—
@@ -40,4 +35,14 @@ void TitleScene::Draw() const
 	DrawFormatString(200, 300, GetColor(255, 255, 255), "Start");
 	DrawFormatString(200, 365, GetColor(255, 255, 255), "End");
 	SetFontSize(20);
+}
+
+AbstractScene* TitleScene::Change()
+{
+	if (InputControl::MouseButtonDown(MOUSE_INPUT_LEFT))
+	{
+		return dynamic_cast<AbstractScene*>(new GameMainScene);
+	}
+
+	return dynamic_cast<AbstractScene*>(this);
 }

@@ -3,23 +3,24 @@
 #include "DxLib.h"
 #include <math.h>
 
+#define BLOCK_WIDTH		(10)
+#define BLOCK_HEIGHT	(10)
+#define BLOCK_MAX		(BLOCK_WIDTH * BLOCK_HEIGHT)
+
 // コンストラクタ
 GameMainScene::GameMainScene()
 {
 	bar = new Bar;
-	ball = new Ball(bar->GetLocation());
+	ball = new Ball;
+	block_count = BLOCK_MAX;
+	block = new Block[BLOCK_MAX];
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < BLOCK_MAX; i++)
 	{
-		block[i] = new Block[16];
-
-		for (int j = 0; j < 10; j++)
-		{
-			float x = (float)j * block[i][j].GetSizeX() + 10;
-			float y = (float)i * (block[i][j].GetSizeY() * 2.0f) + 30.0f;
-			block[i][j].SetLocation(x, y);
-			block[i][j].SetDispFlg(TRUE);
-		}
+		float x = ((i % BLOCK_WIDTH) * block[i].GetSizeX()) + 20.0f;
+		float y = ((i / BLOCK_WIDTH) * block[i].GetSizeY() * 1.5f) + 20.0f;
+		block[i].SetDispFlg(TRUE);
+		block[i].SetLocation(x, y);
 	}
 }
 
@@ -28,45 +29,76 @@ GameMainScene::~GameMainScene()
 {
 	delete bar;
 	delete ball;
-
-	for (int i = 0; i < 10; i++)
-	{
-		delete[] block[i];
-	}
+	delete[] block;
 }
 
 // 更新処理
-AbstractScene* GameMainScene::Update()
+void GameMainScene::Update()
 {
+	// バー更新処理
 	bar->Update();
+	// ボール更新処理
+	ball->Update();
 
-	if (ball->GetState() == Ball::E_STAY)
+	
+	if (ball->GetState() == Ball::E_STAY)				// ボールがステイ状態ならボールにバーの位置情報を教える
 	{
 		ball->SetLocation(bar->GetLocation());
 	}
-	ball->Update();
-
-	// バーとボールの当たり判定を確認
-	if (HitCheck_BB(ball, bar) == TRUE)
+	else if (ball->GetState() == Ball::E_MOVE)			// ボールが動作状態ならバーとブロックの当たり判定処理を行う
 	{
-		float angle = (0.3f * 60.f) * (ball->GetLocationX() - bar->GetLocationX()) + 0.6f;
-		ball->ChangeDirection(angle);
-	}
-
-	// ボールとブロックの当たり判定の確認
-	for (int i = 0; i < 10; i++)
-	{
-		for (int j = 0; j < 16; j++)
+		// バーとボールの当たり判定を確認
+		if (HitCheck_BB(ball, bar) == TRUE)
 		{
-			if (HitCheck_BB(ball, &block[i][j]) == TRUE)
+			// 当たっているなら、反射させる
+			float angle = (18.0f) * (ball->GetLocationX() - bar->GetLocationX()) + 0.6f;
+			ball->ChangeDirection(angle);
+		}
+
+		// ボールとブロックの当たり判定の確認
+		for (int i = 0; i < BLOCK_MAX; i++)
+		{
+			if (block[i].GetDispFlg() != TRUE)
 			{
-				block[i][j].SetDispFlg(FALSE);
+				continue;
+			}
+			if (HitCheck_BB(ball, &block[i]) == TRUE)
+			{
+				// 当たっているなら、反射させる
+				ball->ChangeDirection();
+				block[i].SetDispFlg(FALSE);
+				block_count--;
 			}
 		}
 	}
-	
+	else
+	{
+		;
+	}
+}
 
+// 描画処理
+void GameMainScene::Draw() const
+{
+	// バーの描画処理
+	bar->Draw();
+	// ボールの描画処理
+	ball->Draw();
+	// ブロックの描画処理
+	for (int i = 0; i < BLOCK_MAX; i++)
+	{
+		block[i].Draw();
+	}
+}
+
+AbstractScene* GameMainScene::Change()
+{
+	// 残機がなくなったら、リザルトに遷移する
 	if (ball->GetRemaining_Lives() < 0)
+	{
+		return nullptr;
+	}
+	if (block_count <= 0)
 	{
 		return dynamic_cast<AbstractScene*>(new ResultScene);
 	}
@@ -74,32 +106,13 @@ AbstractScene* GameMainScene::Update()
 	return dynamic_cast<AbstractScene*>(this);
 }
 
-// 描画処理
-void GameMainScene::Draw() const
-{
-#ifdef _DEBUG
-	DrawFormatString(10, 10, GetColor(255, 255, 255), "ゲームメイン画面");
-#endif // _DEBUG
-	
-	bar->Draw();
-	ball->Draw();
-
-	for (int i = 0; i < 10; i++)
-	{
-		for (int j = 0; j < 16; j++)
-		{
-			block[i][j].Draw();
-		}
-	}
-}
-
 // 当たり判定処理
-int GameMainScene::HitCheck_BB(const Ball* ball, const BoxCollision* b)
+int GameMainScene::HitCheck_BB(const Ball* ball, const BoxCollision* target)
 {
 	int ret = FALSE;
 
-	if (ball->GetLocationX() <= (b->GetLocationX() + b->GetSizeX()) && (ball->GetLocationX() + ball->GetSizeX()) >= b->GetLocationX() &&
-		ball->GetLocationY() <= (b->GetLocationY() + b->GetSizeY()) && (ball->GetLocationY() + ball->GetSizeY()) >= b->GetLocationY())
+	if (ball->GetLocationX() <= (target->GetLocationX() + target->GetSizeX()) && (ball->GetLocationX() + ball->GetSizeX()) >= target->GetLocationX() &&
+		ball->GetLocationY() <= (target->GetLocationY() + target->GetSizeY()) && (ball->GetLocationY() + ball->GetSizeY()) >= target->GetLocationY())
 	{
 		ret = TRUE;
 	}

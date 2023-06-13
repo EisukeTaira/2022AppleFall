@@ -3,12 +3,13 @@
 class EndingScene : public AbstractScene
 {
 private:
-
+	int ending_count;
 public:
 	EndingScene();
 	~EndingScene();
 
-	AbstractScene* Update() override;
+	void Update() override;
 	void Draw() const override;
+	AbstractScene* Change() override;
 };
 
